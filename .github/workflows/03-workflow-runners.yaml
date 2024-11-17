@@ -8,14 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show the runner
-        run: echo "Runner OS ${{ runner.os }}"
+        run: |
+          echo "Runner OS ${{ runner.os }}"
+          echo "${RUNNER_OS}"
   windows-echo:
     runs-on: windows-latest
     steps:
       - name: Show the runner
-        run: echo "Runner OS ${{ runner.os }}"
+        run:  |
+          echo "Runner OS ${{ runner.os }}"
+          echo "${RUNNER_OS}"
   macos-echo:
     runs-on: macos-latest
     steps:
       - name: Show the runner
-        run: echo "Runner OS ${{ runner.os }}"
+        run:  |
+          echo "Runner OS ${{ runner.os }}"
+          echo "${RUNNER_OS}"
