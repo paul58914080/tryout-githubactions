@@ -10,14 +10,16 @@ jobs:
       - name: Show the runner
         run: |
           echo "Runner OS ${{ runner.os }}"
-          echo "${RUNNER_OS}"
+          echo "$RUNNER_OS"
   windows-echo:
     runs-on: windows-latest
     steps:
       - name: Show the runner
+        shell: bash
         run:  |
           echo "Runner OS ${{ runner.os }}"
-          echo "${RUNNER_OS}"
+          # This will NOT work on Windows without shell: bash
+          echo "$RUNNER_OS"
   macos-echo:
     runs-on: macos-latest
     steps:
