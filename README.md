@@ -19,7 +19,7 @@ jobs:
 
 > [Read more about Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
 
-## Triggers
+## Triggers (Events filters)
 
 You would be able to trigger the workflow mainly by the following ways:
 - [Repository events](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
