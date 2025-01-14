@@ -123,3 +123,5 @@ There are mainly two types of runners:
 The official documentation about GitHub Action types can be found on the GitHub Docs website. It provides detailed information on the various events that can trigger workflows, including repository events, manual triggers, and scheduled events.
 
 You can refer to the [GitHub Actions Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows) page for comprehensive details.
+
+The activity types when combined with event types the condition becomes an "and" condition. This means that the workflow will be triggered if all the specified conditions are met.
