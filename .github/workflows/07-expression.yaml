@@ -1,0 +1,26 @@
+name: 07 - Expression
+run-name: 07 - Expression | DEBUG - ${{ inputs.debug && 'ON' || 'OFF' }}
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: "Enable debug mode"
+        type: boolean
+        required: false
+        default: false
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "[debug] Print start-up data"
+        if: ${{ inputs.debug == true }}
+        run: |
+          echo "Event name ${{ github.event_name }}; Ref: ${{ github.ref }}; SHA: ${{ github.sha }}; Run OS: ${{ runner.os }}"
+      - name: "[debug] Print when triggered from main"
+        if: ${{ inputs.debug == true && ithub.ref == 'refs/heads/main' }}
+        run: echo "I was triggered from the main branch"
+      - name: Greetings
+        run: echo "Hello, World!"
