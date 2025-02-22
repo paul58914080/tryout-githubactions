@@ -11,9 +11,15 @@ on:
         type: boolean
         required: false
         default: false
+env:
+    MY_WORKFLOW_VAR: "global"
+    MY_OVERWRITTEN_VAR: "global"
 jobs:
   echo-data:
     runs-on: ubuntu-latest
+    env:
+      MY_JOB_VAR: "job"
+      MY_OVERWRITTEN_VAR: "job"
     steps:
       - name: Display Information
         run: |
@@ -22,3 +28,10 @@ jobs:
           echo "Run ID: ${{ github.run_id }}; Run Number: ${{ github.run_number }}"
       - name: Retrieve Variable
         run: echo "The value of my var is ${{ vars.MY_VAR }}"
+      - name: Print Env Variables
+        env:
+          MY_OVERWRITTEN_VAR: "step"
+        run: |
+          echo "MY_WORKFLOW_VAR: $MY_WORKFLOW_VAR"
+          echo "MY_OVERWRITTEN_VAR: $MY_OVERWRITTEN_VAR"
+          echo "MY_VAR: $MY_VAR"
