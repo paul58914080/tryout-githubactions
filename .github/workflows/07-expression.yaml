@@ -1,9 +1,9 @@
 name: 07 - Expression
 run-name: 07 - Expression | DEBUG - ${{ inputs.debug && 'ON' || 'OFF' }}
 on:
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
   workflow_dispatch:
     inputs:
       debug:
