@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "Event name ${{ github.event_name }}; Ref: ${{ github.ref }}; SHA: ${{ github.sha }}; Run OS: ${{ runner.os }}"
       - name: "[debug] Print when triggered from main"
-        if: ${{ inputs.debug == true && ithub.ref == 'refs/heads/main' }}
+        if: ${{ inputs.debug == true && github.ref == 'refs/heads/main' }}
         run: echo "I was triggered from the main branch"
       - name: Greetings
         run: echo "Hello, World!"
