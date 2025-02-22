@@ -24,3 +24,6 @@ jobs:
         run: echo "I was triggered from the main branch"
       - name: Greetings
         run: echo "Hello, World!"
+      - name: Print context
+        run: |
+          echo "${{ toJSON(github) }}"
