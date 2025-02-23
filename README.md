@@ -123,3 +123,40 @@ There are mainly two types of runners:
 The official documentation about GitHub Action types can be found on the GitHub Docs website. It provides detailed information on the various events that can trigger workflows, including repository events, manual triggers, and scheduled events.
 
 You can refer to the [GitHub Actions Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows) page for comprehensive details.
+
+## Context
+
+We use the following syntax to access the context in the workflow:
+
+```yaml
+${{ github.context }}
+```
+
+The `github` context is an object that contains a variety of information about the event that triggered the workflow. You can use this context to access information about the repository, the workflow, the event, and the actor that triggered the event.
+
+The `event` context is an object that contains the payload of the event that triggered the workflow. You can use this context to access information about the event, such as the type of event, the action that triggered the event, and the payload data.
+
+The `inputs` context is an object that contains the input parameters passed to the action. You can use this context to access the input parameters and use them in your workflow.
+
+The `secrets` context is an object that contains the secrets stored in the repository. You can use this context to access the secrets and use them in your workflow.
+
+- [More about contexts](https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs)
+- [Context availability](https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#context-availability)
+
+If you wish to debug you could use `toJSON` function to print the context:
+
+```yaml
+- name: Print context
+  run: echo '${{ toJson(github) }}'
+```
+
+## Functions
+
+https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions#functions
+
+| Function name | Description                                                                                                                                      |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `success()`   | Returns true if all the previous step have succeeded                                                                                             |
+| `always()`    | Causes the step to always run, regardless of the status of previous steps                                                                        |
+| `cancelled()` | Returns true if the workflow was cancelled                                                                                                       |
+| `failure()`   | Returns true when any previous step of a job fails. If you have a chain of dependent jobs, `failure()` returns `true` if any ancestor job fails. |
