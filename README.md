@@ -1,6 +1,15 @@
 # Tryout Github Actions
 
-## Syntax
+## Building blocks
+
+The basic building blocks of a GitHub Action are:
+
+- **Workflow**: A workflow is an automated process that you define in your repository. It consists of one or more jobs that run in response to specific events, such as a push to the repository or a pull request. Workflows are defined in YAML files and are stored in the `.github/workflows` directory of your repository.
+- **Job**: A job is a set of steps that run in the same environment. Each job runs in a fresh instance of the virtual machine, and jobs can run in parallel or sequentially, depending on how you define them in your workflow.
+- **Step**: A step is a single task that is part of a job. Steps can run commands, use actions, or run scripts. Each step runs in the same environment as the job, and you can pass data between steps using environment variables.
+- **Action**: An action is a reusable unit of code that can be used in a workflow. Actions can be created by you or by the community, and they can be shared and reused across different workflows. Actions can be written in JavaScript or Docker, and they can perform a wide range of tasks, such as building, testing, and deploying code.
+
+Syntax
 
 ```yaml
 name: [The job name that will be displayed on the Github UI]
