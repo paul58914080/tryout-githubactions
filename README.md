@@ -34,11 +34,14 @@ jobs:
 ## Triggers
 
 You would be able to trigger the workflow mainly by the following ways:
+
+![Triggers](docs/img/triggers.png)
+
 - [Repository events](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
-- Manual triggers (`workflow_dispatch`)
-  - Through the Github UI
-  - Through the Github API
-  - Another workflow
+- Manual triggers 
+  - Through the Github UI (`workflow_dispatch`)
+  - [Through the Github API](https://docs.github.com/en/rest/actions/workflows)
+  - [Another workflow](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow#triggering-a-workflow-from-a-workflow)
 - Schedule
   - Cron syntax
 
