@@ -28,6 +28,16 @@ jobs:
 
 > [Read more about Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
 
+## Runners
+
+Runners can be categorized into two main types:
+- **GitHub-hosted runners**: These are virtual machines hosted by GitHub. They come with a set of pre-installed software and tools, and you can also install additional software as needed. Each job runs in a fresh instance of the virtual machine, which is created and destroyed for each job. Jobs get a fresh instance of the virtual machine, which is created and destroyed for each job. This means that you can use the same runner for multiple jobs, but each job will run in its own isolated environment. However, for steps within a job, you can use the same environment and share data between steps. This allows you to run multiple steps in the same environment without having to create a new virtual machine for each step.
+- **Self-hosted runners**: These are machines that you manage and maintain. You can install the GitHub Actions runner application on your own servers or cloud instances. Self-hosted runners give you more control over the environment, including the software and tools installed, but you are responsible for maintaining and updating them. Jobs need NOT run in a fresh instance of the virtual machine, and you can share data between jobs. This means that you can use the same runner for multiple jobs, and each job will run in the same environment. This is upto you how you configure the self-hosted runners.
+- 
+
+> [Read more about GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners) and [Self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners).
+
+
 ## Triggers
 
 You would be able to trigger the workflow mainly by the following ways:
