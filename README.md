@@ -1,5 +1,7 @@
 # Tryout Github Actions
 
+Tryout's based on course [GitHub Actions: The Complete Guide from Beginner to Expert](https://www.udemy.com/course/mastering-github-actions-beginner-to-expert/). I have tried to document whatever I have learnt during this journey.
+
 ## Building blocks
 
 The basic building blocks of a GitHub Action are:
@@ -29,7 +31,6 @@ jobs:
 ```
 
 > [Read more about Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
-
 
 ## Triggers
 
