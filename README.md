@@ -2,6 +2,23 @@
 
 Tryout's based on course [GitHub Actions: The Complete Guide from Beginner to Expert](https://www.udemy.com/course/mastering-github-actions-beginner-to-expert/). I have tried to document whatever I have learnt during this journey.
 
+<!-- TOC -->
+* [Tryout Github Actions](#tryout-github-actions)
+  * [Building blocks](#building-blocks)
+  * [Triggers](#triggers)
+    * [As list](#as-list)
+    * [As map](#as-map)
+    * [As map with multiple events](#as-map-with-multiple-events)
+    * [As map with branches and paths](#as-map-with-branches-and-paths)
+    * [As map with tags](#as-map-with-tags)
+    * [As map with condition](#as-map-with-condition)
+    * [As map with types](#as-map-with-types)
+  * [Runners](#runners)
+  * [Activity types](#activity-types)
+  * [Context](#context)
+  * [Functions](#functions)
+<!-- TOC -->
+
 ## Building blocks
 
 The basic building blocks of a GitHub Action are:
