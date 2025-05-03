@@ -253,3 +253,27 @@ https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow
 | `always()`    | Causes the step to always run, regardless of the status of previous steps                                                                        |
 | `cancelled()` | Returns true if the workflow was cancelled                                                                                                       |
 | `failure()`   | Returns true when any previous step of a job fails. If you have a chain of dependent jobs, `failure()` returns `true` if any ancestor job fails. |
+
+## Variables
+
+![variables](docs/img/variables.png)
+
+### `env.<variable>` — Workflow/Job/Step Environment Variables
+
+| Aspect           | Details                                                         |
+| ---------------- | --------------------------------------------------------------- |
+| **Scope**        | Defined in workflow, job, or step                               |
+| **Set in**       | The `env:` block or inline in a shell step                      |
+| **Mutable?**     | ✅ Yes — you can override or change them                         |
+| **Usage**        | For temporary config values, secrets masking, or CLI parameters |
+| **Accessed via** | `${{ env.MY_VAR }}` in workflow, `$MY_VAR` in shell             |
+
+### `vars.<variable>` — Organization/Repository Environment Variables
+
+| Aspect           | Details                                                            |
+| ---------------- | ------------------------------------------------------------------ |
+| **Scope**        | Defined at the repository, organization, or environment level (UI) |
+| **Set in**       | GitHub UI: *Settings → Variables*                                  |
+| **Mutable?**     | ❌ No — set in UI only, not within workflows                        |
+| **Usage**        | For shared, reusable configuration values                          |
+| **Accessed via** | `${{ vars.MY_VAR }}`                                               |
