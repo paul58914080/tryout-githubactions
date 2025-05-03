@@ -82,13 +82,18 @@ on:
 ```yaml
 on:
   push: # event 1
+    types: # activity types
+      - created
+      - edited
+      - reopened
+      - synchronize
     branches:
-      - main
-      - master
+      - main # event filter
+      - master # event filter
   pull_request: # event 2
     branches:
-      - main
-      - master
+      - main # event filter
+      - master # event filter
   workflow_dispatch: # event 3
   schedule: # event 4
     - cron: '0 0 * * *'
@@ -153,13 +158,66 @@ Runners can be categorized into two main types:
 
 > [Read more about GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners) and [Self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners).
 
+## Events & filters
+
+![events_activity_types.png](docs/img/events_activity_types.png)
+
+| **Event**                         | **Description**                                    | **Available Filters**                                                                                     |
+|-----------------------------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `push`                            | Triggered on code pushes to a branch               | `branches`, `branches-ignore`, `tags`, `tags-ignore`, `paths`, `paths-ignore`                             |
+| `pull_request`                    | Triggered on PR activities (e.g., open, sync)      | `branches`, `branches-ignore`, `paths`, `paths-ignore`, `types` (e.g., `opened`, `synchronize`, `closed`) |
+| `workflow_dispatch`               | Manual trigger via UI or API                       | `inputs` (custom user-defined input parameters)                                                           |
+| `schedule`                        | Triggered by a cron schedule                       | `cron` (e.g., `'0 0 * * *'` for daily at midnight UTC)                                                    |
+| `release`                         | Triggered on release actions                       | `types` (e.g., `published`, `created`, `edited`, `prereleased`, `released`)                               |
+| `issues`                          | Triggered on issue events                          | `types` (e.g., `opened`, `edited`, `closed`, `reopened`)                                                  |
+| `issue_comment`                   | Triggered on comment activity on issues/PRs        | `types` (e.g., `created`, `edited`, `deleted`)                                                            |
+| `pull_request_review`             | Triggered on review activity on PRs                | `types` (e.g., `submitted`, `edited`, `dismissed`)                                                        |
+| `pull_request_review_comment`     | Triggered on PR review comments                    | `types` (e.g., `created`, `edited`, `deleted`)                                                            |
+| `deployment`, `deployment_status` | Triggered on deployments and their status updates  | No direct filters; respond to all occurrences                                                             |
+| `create`, `delete`                | Triggered on creation/deletion of branches or tags | No filters, but event payload includes `ref_type` and `ref`                                               |
+| `fork`, `watch`, `star`, etc.     | Triggered on repo events                           | No filters                                                                                                |
+
+
 ## Activity types
+
+| **Event**                     | **Available `types` (Activity Types)**                                                                                                                                                                                  |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pull_request`                | `assigned`, `unassigned`, `labeled`, `unlabeled`, `opened`, `edited`, `closed`, `reopened`, `synchronize`, `converted_to_draft`, `ready_for_review`, `locked`, `unlocked`, `review_requested`, `review_request_removed` |
+| `push`                        | *No activity types* — triggers on all push events; use `branches`, `tags`, and `paths` to filter                                                                                                                        |
+| `issues`                      | `opened`, `edited`, `deleted`, `transferred`, `pinned`, `unpinned`, `closed`, `reopened`, `assigned`, `unassigned`, `labeled`, `unlabeled`, `locked`, `unlocked`, `milestoned`, `demilestoned`                          |
+| `issue_comment`               | `created`, `edited`, `deleted`                                                                                                                                                                                          |
+| `release`                     | `published`, `unpublished`, `created`, `edited`, `deleted`, `prereleased`, `released`                                                                                                                                   |
+| `pull_request_review`         | `submitted`, `edited`, `dismissed`                                                                                                                                                                                      |
+| `pull_request_review_comment` | `created`, `edited`, `deleted`                                                                                                                                                                                          |
+| `create` / `delete`           | *No activity types* — triggered for all create/delete events (use `ref_type` or `ref` inside the job)                                                                                                                   |
+| `workflow_run`                | `completed`, `requested`, `in_progress`                                                                                                                                                                                 |
+| `deployment`                  | *No activity types*                                                                                                                                                                                                     |
+| `deployment_status`           | *No activity types*                                                                                                                                                                                                     |
+| `fork`, `watch`, `star`       | *No activity types*                                                                                                                                                                                                     |
+
 
 The official documentation about GitHub Action types can be found on the GitHub Docs website. It provides detailed information on the various events that can trigger workflows, including repository events, manual triggers, and scheduled events.
 
 You can refer to the [GitHub Actions Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows) page for comprehensive details.
 
 ## Context
+
+| **Context**    | **Description**                                                                     | **Example Usage**                                 |
+|----------------|-------------------------------------------------------------------------------------|---------------------------------------------------|
+| `github`       | Contains information about the event that triggered the workflow and the repository | `github.ref`, `github.repository`, `github.actor` |
+| `env`          | Contains environment variables defined in the workflow or job                       | `env.MY_VAR`                                      |
+| `secrets`      | Accesses encrypted secrets stored in the repository or organization                 | `secrets.MY_SECRET`                               |
+| `job`          | Information about the current job (status, ID)                                      | `job.status`                                      |
+| `steps`        | Contains outputs from previous steps                                                | `steps.my_step.outputs.output_name`               |
+| `runner`       | Information about the runner executing the job                                      | `runner.os`, `runner.arch`                        |
+| `strategy`     | Used in matrix builds to access the current matrix values                           | `strategy.matrix.node`                            |
+| `matrix`       | Shortcut to access the `strategy.matrix` values                                     | `matrix.node`                                     |
+| `needs`        | Accesses outputs and results from jobs this job depends on                          | `needs.job_id.outputs.output_name`                |
+| `inputs`       | Accesses user-provided inputs to `workflow_dispatch` or reusable workflows          | `inputs.environment`                              |
+| `vars`         | Accesses repository-level custom variables                                          | `vars.MY_VAR`                                     |
+| `parameters`   | Used in reusable workflows to access inputs passed in                               | `inputs.input_name` (alias for `parameters`)      |
+| `github.event` | Contains the full webhook payload that triggered the workflow                       | `github.event.head_commit.message`                |
+
 
 We use the following syntax to access the context in the workflow:
 
