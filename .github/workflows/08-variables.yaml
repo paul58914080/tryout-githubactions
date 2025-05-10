@@ -6,47 +6,48 @@ on:
 #      - main
   workflow_dispatch:
 env:
-  WORKFLOW_VAR: "I am a workflow env variable"
-  OVERWRITTEN: "I will be overwritten"
+  WORKFLOW_VAR: "Workflow Environment Variable Value"
+  OVERWRITTEN: "Overwritten Workflow Environment Variable Value"
   UNDEFINED_VAR_WITH_DEFAULT: ${{ vars.UNDEFINED_VAR || 'default value' }}
 jobs:
   echo:
     runs-on: ubuntu-latest
     env:
-      JOB_VAR: "I am a job env variable"
-      OVERWRITTEN: "I have been overwritten at job level"
+      JOB_VAR: "Job Environment Variable Value"
+      OVERWRITTEN: "Overwritten Job Environment Variable Value"
     steps:
-      - name: Print Env Variables
+      - name: Print environment variable
         env:
-          STEP_VAR: "I am a step env variable"
-          step_var2: "I am another step env variable"
+          STEP_VAR: "Step Environment Variable Value"
+          STEP_VAR2: "Step Environment Variable(2) Value"
         run: |
-          echo "Step env var: $STEP_VAR"
-          echo "Step env var 2: $step_var2"
-          echo "Job env var: $JOB_VAR"
-          echo "Workflow env var: $WORKFLOW_VAR"
-          echo "Overwritten at job level: $OVERWRITTEN"
-      - name: Overwrite Job Variable
+          echo "Step environment variable: [ $STEP_VAR ]"
+          echo "Step environment variable (2): [ ${{ env.STEP_VAR2 }} ]"
+          echo "Job environment variable: [ $JOB_VAR ]"
+          echo "Workflow environment variable: [ $WORKFLOW_VAR ]"
+          echo "Overwritten environment variable: [ $OVERWRITTEN ]"
+      - name: Overwrite job variable
         env:
-          OVERWRITTEN: "I have been overwritten at step level"
-        run: echo "Step env var $OVERWRITTEN"
+          OVERWRITTEN: "Overwritten Step Environment Variable Value"
+        run: |
+          echo "Overwritten environment variable: [ $OVERWRITTEN ]"
   echo2:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Variables
+      - name: Print variables
         run: |
-          echo "Repo var: ${{ vars.REPOSITORY_VAR }}"
+          echo "Repository variable: [ ${{ vars.REPOSITORY_VAR }} ]"
   echo-prod:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - name: Print Prod Variables
+      - name: Print prod variables
         run: |
-          echo "Repo var: ${{ vars.REPOSITORY_VAR }}"
-          echo "Environment var: ${{ vars.TARGET_VAR }}"
+          echo "Repository variable: [ ${{ vars.REPOSITORY_VAR }} ]"
+          echo "Environment variable: [ ${{ vars.TARGET_VAR }} ]"
   echo-undefined:
     runs-on: ubuntu-latest
     steps:
       - name: Print undefined variables
         run: |
-          echo "undefined varibale ${{ env.UNDEFINED_VAR_WITH_DEFAULT }}"
+          echo "Undefined variable: [ ${{ env.UNDEFINED_VAR_WITH_DEFAULT }} ]"
