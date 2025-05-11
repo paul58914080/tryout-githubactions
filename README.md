@@ -200,6 +200,8 @@ The official documentation about GitHub Action types can be found on the GitHub 
 
 You can refer to the [GitHub Actions Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows) page for comprehensive details.
 
+The activity types when combined with event types the condition becomes an "and" condition. This means that the workflow will be triggered if all the specified conditions are met.
+
 ## Context
 
 | **Context**    | **Description**                                                                     | **Example Usage**                                 |
@@ -261,7 +263,7 @@ https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow
 ### `env.<variable>` — Workflow/Job/Step Environment Variables
 
 | Aspect           | Details                                                         |
-| ---------------- | --------------------------------------------------------------- |
+|------------------|-----------------------------------------------------------------|
 | **Scope**        | Defined in workflow, job, or step                               |
 | **Set in**       | The `env:` block or inline in a shell step                      |
 | **Mutable?**     | ✅ Yes — you can override or change them                         |
@@ -271,7 +273,7 @@ https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow
 ### `vars.<variable>` — Organization/Repository Environment Variables
 
 | Aspect           | Details                                                            |
-| ---------------- | ------------------------------------------------------------------ |
+|------------------|--------------------------------------------------------------------|
 | **Scope**        | Defined at the repository, organization, or environment level (UI) |
 | **Set in**       | GitHub UI: *Settings → Variables*                                  |
 | **Mutable?**     | ❌ No — set in UI only, not within workflows                        |
