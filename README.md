@@ -256,6 +256,19 @@ https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow
 | `cancelled()` | Returns true if the workflow was cancelled                                                                                                       |
 | `failure()`   | Returns true when any previous step of a job fails. If you have a chain of dependent jobs, `failure()` returns `true` if any ancestor job fails. |
 
+
+### Default Behavior:
+
+- **Steps**:
+  - By default, a step runs only if all previous steps in the same job succeed.
+  - If a step fails, subsequent steps are skipped unless explicitly configured with `if: always()` or similar conditions.
+
+- **Jobs**:
+  - By default, a job runs only if all jobs it depends on succeed.
+  - If a job fails, dependent jobs are skipped unless configured with `continue-on-error: true` or similar conditions.
+  - A subsequent non-dependent job will run even if the previous job has failed. Jobs in GitHub Actions are independent by default unless explicitly defined as dependent using the needs keyword. If there is no dependency, the failure of one job does not affect the execution of other jobs.
+
+
 ## Variables
 
 ![variables](docs/img/variables.png)
